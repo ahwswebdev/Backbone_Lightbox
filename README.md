@@ -19,6 +19,6 @@ click overlay = close
 fullscreen when < pixel width
 
 Backbone view events
-Change content
+Change content (animate height)
 
 Alert, Confirm functionality
