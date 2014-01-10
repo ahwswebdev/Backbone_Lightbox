@@ -48,9 +48,11 @@ body {
 $(function () {
   var lightboxView = new LightboxView();
   $('.body-container').click(function () {
-    $('.body-container').addClass('locked');
+    var scrollTop = $(window).scrollTop();
+    $('.body-container').addClass('locked').css('marginTop', -scrollTop);
     $.when(lightboxView.show('<p style="margin:0; padding: 0; height:2000px;">height: 2000 px;</p>')).then(function () {
-      $('.body-container').removeClass('locked');
+      $('.body-container').removeClass('locked').css('marginTop', 0);
+      window.scrollTo(0, scrollTop);
     });
   });
 });
