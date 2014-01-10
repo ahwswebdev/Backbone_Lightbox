@@ -134,4 +134,4 @@
 	});
 
 	window.LightboxView = LightboxView;
-})(window, jQuery, _, Backbone);
+}(window, jQuery, _, Backbone));
