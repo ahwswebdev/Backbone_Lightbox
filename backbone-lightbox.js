@@ -31,7 +31,7 @@
 
     _setListeners: function () {
       _.bindAll(this, '_centerVertically', '_onElClicked', '_keyup');
-      $(window).on('resize', this._centerVertically);
+      $(window).on('resize', this._onResize);
 			this.$el.click(this._onElClicked);
 			$(document).keyup(this._keyup);
     },
@@ -116,10 +116,18 @@
 			}
 		},
 
+    _onResize: function (e) {
+      if (this._centeredVertically) { 
+        this._centerVertically();
+      }
+    },
+
     _centerVertically: function () {
+      this._centeredVertically = false;
       var windowHeight = $(window).height();
       var wrapperHeight = this.$wrapper.height();
       if (windowHeight > wrapperHeight) {
+        this._centeredVertically = true;
         this.$wrapper.css('marginTop', Math.floor((windowHeight - wrapperHeight) / 2));
       }
     }
