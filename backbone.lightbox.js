@@ -4,7 +4,9 @@
 
     tagName: 'div',
     className: 'lightbox',
-    options: {},
+    options: {
+      closeButtonTitle: 'close'
+    },
     content: '',
     _dfd: null,
 
@@ -13,10 +15,11 @@
     },
 
     initialize: function (options) {
+      this.options = $.extend(this.options, options);
       if (options && options.width) {
         this.width = options.width;
       }
-      this.$el.html('<div class="lightbox-wrapper"><button class="lightbox-close" title="close"></button><div class="lightbox-content"></div></div>');
+      this.$el.html('<div class="lightbox-wrapper"><button class="lightbox-close" title="' + this.options.closeButtonTitle + '"></button><div class="lightbox-content"></div></div>');
       $('body').append(this.$el);
       this.hide();
       this._setLocalScope();

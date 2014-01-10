@@ -16,6 +16,17 @@ describe('lightbox', function () {
     expect(this.LightboxView.$el).toBeHidden();
   });
 
+  describe('options', function () {
+    it('default', function () {
+      expect(this.LightboxView.options.closeButtonTitle).toBe('close');
+    });
+
+    it('closeButtonTitle', function () {
+      var lightboxView = new LightboxView({closeButtonTitle: 'sluit'});
+      expect(lightboxView.$el.html()).toContain('sluit');
+    });
+  });
+
   describe('show', function () {
 
     it('to parse Backbone View', function () {
