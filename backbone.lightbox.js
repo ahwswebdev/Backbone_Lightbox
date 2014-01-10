@@ -16,9 +16,6 @@
 
     initialize: function (options) {
       this.options = $.extend(this.options, options);
-      if (options && options.width) {
-        this.width = options.width;
-      }
       this.$el.html('<div class="lightbox-wrapper"><button class="lightbox-close" title="' + this.options.closeButtonTitle + '"></button><div class="lightbox-content"></div></div>');
       $('body').append(this.$el);
       this.hide();
@@ -88,7 +85,7 @@
         }
       }
       // set width
-      width = width || this.width;
+      width = width || this.options.width;
       if (width) {
         this._setWidth(width);
       }
