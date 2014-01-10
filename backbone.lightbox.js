@@ -8,7 +8,6 @@
     content: '',
     _dfd: null,
 
-    // events
     events: {
       'click .lightbox-close': 'hide',
     },
@@ -117,7 +116,7 @@
     },
 
     _onResize: function (e) {
-      if (this._centeredVertically) { 
+      if (this._centeredVertically) {
         this._centerVertically();
       }
     },
