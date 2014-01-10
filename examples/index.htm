@@ -49,7 +49,9 @@ $(function () {
   var lightboxView = new LightboxView();
   $('.body-container').click(function () {
     $('.body-container').addClass('locked');
-    lightboxView.show('<p style="margin:0; padding: 0; height:2000px;">height: 2000 px;</p>');
+    $.when(lightboxView.show('<p style="margin:0; padding: 0; height:2000px;">height: 2000 px;</p>')).then(function () {
+      $('.body-container').removeClass('locked');
+    });
   });
 });
 </script>

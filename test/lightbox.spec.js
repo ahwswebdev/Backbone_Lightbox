@@ -72,4 +72,25 @@ describe('lightbox', function () {
       expect(lightboxView.$wrapper).toHaveCss({width: '500px'});
     });
   });
+
+  describe('promise', function () {
+    it('to return promise', function () {
+      var ret = this.LightboxView.show('<p class="par">text</p>');
+      expect(typeof ret.then).toBe('function');
+    });
+
+    it('to resolve on hide', function () {
+      var spy = jasmine.createSpy('spy')
+      $.when(this.LightboxView.show('<p class="par">text</p>')).then(spy);
+      this.LightboxView.hide();
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('to resolve on sequential show calls', function () {
+      var spy = jasmine.createSpy('spy')
+      $.when(this.LightboxView.show('<p class="par">text</p>')).then(spy);
+      this.LightboxView.show('<p>par 2</p>');
+      expect(spy).toHaveBeenCalled();
+    });
+  });
 });

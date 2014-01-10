@@ -6,6 +6,7 @@
 		className: 'lightbox',
     options: {},
 		content: '',
+    _dfd: null,
 
 		// events
 		events: {
@@ -59,6 +60,18 @@
       this.$wrapper.css('width', width);
     },
 
+    _resolvePromise: function () {
+      if (this._dfd) {
+        this._dfd.resolve();
+        this._dfd = null;
+      }
+    },
+
+    _setPromise: function () {
+      this._resolvePromise();
+      this._dfd = new jQuery.Deferred();
+    },
+
 		render: function () {
 			this.$content.empty();
 			this.$content.append(this._content);
@@ -81,11 +94,13 @@
 			this.render();
 			this.$el.show();
       this._centerVertically();
-			return this;
+      this._setPromise();
+      return this._dfd.promise();
 		},
 
 		hide: function () {
 			this.$el.hide();
+      this._resolvePromise();
 			return this;
 		},
 
