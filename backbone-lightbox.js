@@ -17,7 +17,7 @@
       if (options && options.width) {
         this.width = options.width;
       }
-			this.$el.html('<div class="lightbox-wrapper"><div class="lightbox-close">X</div><div class="lightbox-content"></div></div>');
+			this.$el.html('<div class="lightbox-wrapper"><button class="lightbox-close" title="close"></button><div class="lightbox-content"></div></div>');
 			$('body').append(this.$el);
       this.hide();
 			this._setLocalScope();
