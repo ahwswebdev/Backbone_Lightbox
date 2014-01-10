@@ -16,7 +16,7 @@ module.exports = function (grunt) {
           '_': true
         }
       },
-      all: ['backbone-lightbox.js']
+      all: ['backbone.lightbox.js']
     },
     karma: {
       unit: {
