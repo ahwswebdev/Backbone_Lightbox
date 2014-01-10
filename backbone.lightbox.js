@@ -24,8 +24,8 @@
     },
 
     _setLocalScope: function () {
-      this.$content = this.$el.find('.lightbox-content');
-      this.$wrapper = this.$el.find('.lightbox-wrapper');
+      this.$content = this.$('.lightbox-content');
+      this.$wrapper = this.$('.lightbox-wrapper');
     },
 
     _setListeners: function () {
