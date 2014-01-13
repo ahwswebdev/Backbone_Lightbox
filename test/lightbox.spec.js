@@ -25,6 +25,11 @@ describe('lightbox', function () {
       var lightboxView = new LightboxView({closeButtonTitle: 'sluit'});
       expect(lightboxView.$el.html()).toContain('sluit');
     });
+
+    it('additional className', function () {
+      var lightboxView = new LightboxView({'additionalClassName': 'location-class'});
+      expect(lightboxView.$el).toHaveClass('location-class');
+    });
   });
 
   describe('show', function () {

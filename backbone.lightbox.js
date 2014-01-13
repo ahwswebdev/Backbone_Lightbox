@@ -17,6 +17,9 @@
     initialize: function (options) {
       this.options = $.extend(this.options, options);
       this.$el.html('<div class="lightbox-wrapper"><button class="lightbox-close" title="' + this.options.closeButtonTitle + '"></button><div class="lightbox-content"></div></div>');
+      if (this.options.additionalClassName) {
+        this.$el.addClass(this.options.additionalClassName);
+      }
       $('body').append(this.$el);
       this.hide();
       this._setLocalScope();
