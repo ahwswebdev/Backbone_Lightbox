@@ -11,7 +11,7 @@
     _dfd: null,
 
     events: {
-      'click .lightbox-close': 'hide',
+      'click .lightbox-close': 'hide'
     },
 
     initialize: function (options) {
