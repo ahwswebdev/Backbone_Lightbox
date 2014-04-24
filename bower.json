@@ -1,0 +1,20 @@
+{
+  "name": "Backbone_Lightbox",
+  "version": "0.0.1",
+  "homepage": "https://github.com/gilleswittenberg/Backbone_Lightbox",
+  "authors": [
+    "Gilles Wittenberg <git@gilleswittenberg.com>"
+  ],
+  "main": "backbone.lightbox.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "jasmine-jquery": "1.7"
+  }
+}
