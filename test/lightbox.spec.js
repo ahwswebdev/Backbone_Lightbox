@@ -123,4 +123,28 @@ describe('lightbox', function () {
       expect(this.LightboxView.$el).not.toContain('.lightbox-close');
     });
   });
+
+  describe('centerVertically', function () {
+
+    it('to centerVertically as default', function () {
+
+      var spy = spyOn(this.LightboxView, '_centerVertically').andCallThrough();
+      this.LightboxView.show('<p class="par">text</p>');
+      expect(spy).toHaveBeenCalled();
+      expect(spy.callCount).toBe(1);
+      this.LightboxView._onResize();
+      expect(spy.callCount).toBe(2);
+    });
+
+    it('to not centerVertically', function () {
+
+      var spy;
+      this.LightboxView = new LightboxView({centerVertically: false});
+      spy = spyOn(this.LightboxView, '_centerVertically').andCallThrough();
+      this.LightboxView.show('<p class="par">text</p>');
+      expect(spy).not.toHaveBeenCalled();
+      this.LightboxView._onResize();
+      expect(spy).not.toHaveBeenCalled();
+    });
+  });
 });

@@ -6,7 +6,8 @@
     className: 'lightbox',
     options: {
       closeButton: true,
-      closeButtonTitle: 'close'
+      closeButtonTitle: 'close',
+      centerVertically: true
     },
     content: '',
     _dfd: null,
@@ -99,7 +100,9 @@
       // show content
       this.render();
       this.$el.show();
-      this._centerVertically();
+      if (this.options.centerVertically) {
+        this._centerVertically();
+      }
       this._setPromise();
       return this._dfd.promise();
     },
