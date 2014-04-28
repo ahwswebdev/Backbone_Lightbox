@@ -5,6 +5,7 @@
     tagName: 'div',
     className: 'lightbox',
     options: {
+      closeButton: true,
       closeButtonTitle: 'close'
     },
     content: '',
@@ -16,7 +17,10 @@
 
     initialize: function (options) {
       this.options = $.extend(this.options, options);
-      this.$el.html('<div class="lightbox-wrapper"><button class="lightbox-close" title="' + this.options.closeButtonTitle + '"></button><div class="lightbox-content"></div></div>');
+      this.$el.html('<div class="lightbox-wrapper"><div class="lightbox-content"></div></div>');
+      if (this.options.closeButton) {
+        this.$('.lightbox-wrapper').prepend('<button class="lightbox-close" title="' + this.options.closeButtonTitle + '"></button>');
+      }
       if (this.options.additionalClassName) {
         this.$el.addClass(this.options.additionalClassName);
       }

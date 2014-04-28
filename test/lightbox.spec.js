@@ -109,4 +109,18 @@ describe('lightbox', function () {
       expect(spy).toHaveBeenCalled();
     });
   });
+
+  describe('closeButton', function () {
+
+    it('to have closeButton as default', function () {
+      this.LightboxView.show('<p class="par">text</p>');
+      expect(this.LightboxView.$el).toContain('.lightbox-close');
+    });
+
+    it('to not have closeButton', function () {
+      this.LightboxView = new LightboxView({closeButton: false});
+      this.LightboxView.show('<p class="par">text</p>');
+      expect(this.LightboxView.$el).not.toContain('.lightbox-close');
+    });
+  });
 });
