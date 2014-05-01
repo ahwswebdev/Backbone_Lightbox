@@ -18,6 +18,8 @@
 
     renderOptions: null,
 
+    template: null,
+
     content: '',
 
     _dfd: null,
@@ -35,11 +37,22 @@
       // set initial options
       this.options = $.extend(this.options, options);
 
+      // set template
+      this._setTemplate();
+
       // add element to body
       $('body').append(this.$el);
 
       // render
       this.render();
+    },
+
+    _setTemplate: function () {
+      var template = '<div class="lightbox-wrapper">' +
+      '<% if (closeButton) { %> <button class="lightbox-close" title="<%= closeButtonTitle %>"></button> <% } %>' +
+      '<div class="lightbox-content"></div>' +
+      '</div>';
+      this.template = _.template(template);
     },
 
     _cacheSelectors: function () {
@@ -97,10 +110,8 @@
 
       this.renderOptions = $.extend(this.options, options);
 
-      this.$el.html('<div class="lightbox-wrapper"><div class="lightbox-content"></div></div>');
-      if (this.renderOptions.closeButton) {
-        this.$('.lightbox-wrapper').prepend('<button class="lightbox-close" title="' + this.renderOptions.closeButtonTitle + '"></button>');
-      }
+      this.$el.html(this.template(this.renderOptions));
+
       if (this.renderOptions.additionalClassName) {
         this.$el.addClass(this.renderOptions.additionalClassName);
       }
@@ -151,6 +162,7 @@
     hide: function () {
       this._removeListeners();
       this.$el.hide();
+      this.$el.removeClass().addClass('lightbox');
       this._resolvePromise();
       return this;
     },

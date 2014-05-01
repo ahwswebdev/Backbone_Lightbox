@@ -144,6 +144,12 @@ describe('lightbox', function () {
       this.LightboxView.show('<p>text</p>', {additionalClassName: 'location-class'});
       expect(this.LightboxView.$el).toHaveClass('location-class');
     });
+
+    it('to be removed on hide', function () {
+      this.LightboxView.show('<p>text</p>', {additionalClassName: 'location-class'});
+      this.LightboxView.hide();
+      expect(this.LightboxView.$el).not.toHaveClass('location-class');
+    });
   });
 
   describe('centerVertically', function () {
