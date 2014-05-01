@@ -23,6 +23,7 @@
     _dfd: null,
 
     events: {
+      'click': '_onElClicked',
       'click .lightbox-close': 'hide'
     },
 
@@ -39,7 +40,6 @@
 
       // render
       this.render();
-      this._setListeners();
     },
 
     _setLocalScope: function () {
@@ -48,9 +48,13 @@
     },
 
     _setListeners: function () {
-      $(window).on('resize', this._onResize);
-      this.$el.click(this._onElClicked);
-      $(document).keyup(this._keyup);
+      $(window).on('resize.lightbox', this._onResize);
+      $(document).on('keyup.lightbox', this._keyup);
+    },
+
+    _removeListeners: function () {
+      $(window).off('resize.lightbox', this._onResize);
+      $(document).off('keyup.lightbox', this._keyup);
     },
 
     _setContent: function (content) {
@@ -103,6 +107,7 @@
       this._setLocalScope();
       this.$content.empty();
       this.$content.append(this._content);
+      this._setListeners();
       return this;
     },
 
@@ -144,6 +149,7 @@
     },
 
     hide: function () {
+      this._removeListeners();
       this.$el.hide();
       this._resolvePromise();
       return this;
