@@ -10,12 +10,20 @@ describe('lightbox', function () {
     this.LightboxView.remove();
   });
 
-  it('is properly initialized and hidden', function () {
-    expect(this.LightboxView.$el).toHaveClass('lightbox');
-    expect(this.LightboxView.$el).toContain('.lightbox-wrapper');
-    expect(this.LightboxView.$el).toContain('.lightbox-close');
-    expect(this.LightboxView.$el).toContain('.lightbox-content');
-    expect(this.LightboxView.$el).toBeHidden();
+  describe('rendering', function () {
+
+    it('is properly initialized and hidden', function () {
+      expect(this.LightboxView.$el).toHaveClass('lightbox');
+      expect(this.LightboxView.$el).toBeHidden();
+    });
+
+
+    it('has layout elements rendered', function () {
+      this.LightboxView.show();
+      expect(this.LightboxView.$el).toContain('.lightbox-wrapper');
+      expect(this.LightboxView.$el).toContain('.lightbox-close');
+      expect(this.LightboxView.$el).toContain('.lightbox-content');
+    });
   });
 
   describe('options init', function () {
@@ -26,11 +34,13 @@ describe('lightbox', function () {
 
     it('closeButtonTitle', function () {
       var lightboxView = new LightboxView({closeButtonTitle: 'sluit'});
+      lightboxView.show();
       expect(lightboxView.$el.html()).toContain('sluit');
     });
 
     it('additional className', function () {
       var lightboxView = new LightboxView({additionalClassName: 'location-class'});
+      lightboxView.show();
       expect(lightboxView.$el).toHaveClass('location-class');
     });
   });
@@ -137,6 +147,7 @@ describe('lightbox', function () {
 
     it('default', function () {
       this.LightboxView = new LightboxView({additionalClassName: 'location-class'});
+      this.LightboxView.show();
       expect(this.LightboxView.$el).toHaveClass('location-class');
     });
 

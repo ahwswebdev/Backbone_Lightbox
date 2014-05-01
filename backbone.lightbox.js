@@ -42,9 +42,6 @@
 
       // add element to body
       $('body').append(this.$el);
-
-      // render
-      this.render();
     },
 
     _setTemplate: function () {
