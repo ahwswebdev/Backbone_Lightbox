@@ -63,8 +63,8 @@
     },
 
     _removeListeners: function () {
-      $(window).off('resize.lightbox', this._onResize);
-      $(document).off('keyup.lightbox', this._keyup);
+      $(window).off('resize.lightbox');
+      $(document).off('keyup.lightbox');
     },
 
     _setContent: function (content) {
