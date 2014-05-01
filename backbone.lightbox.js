@@ -27,8 +27,17 @@
     },
 
     initialize: function (options) {
+
+      // bind methods
+      _.bindAll(this, '_centerVertically', '_onElClicked', '_keyup');
+
+      // set initial options
       this.options = $.extend(this.options, options);
+
+      // add element to body
       $('body').append(this.$el);
+
+      // render
       this.render();
       this._setListeners();
     },
@@ -39,7 +48,6 @@
     },
 
     _setListeners: function () {
-      _.bindAll(this, '_centerVertically', '_onElClicked', '_keyup');
       $(window).on('resize', this._onResize);
       this.$el.click(this._onElClicked);
       $(document).keyup(this._keyup);
