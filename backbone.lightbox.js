@@ -42,7 +42,7 @@
       this.render();
     },
 
-    _setLocalScope: function () {
+    _cacheSelectors: function () {
       this.$content = this.$('.lightbox-content');
       this.$wrapper = this.$('.lightbox-wrapper');
     },
@@ -104,7 +104,7 @@
       if (this.renderOptions.additionalClassName) {
         this.$el.addClass(this.renderOptions.additionalClassName);
       }
-      this._setLocalScope();
+      this._cacheSelectors();
       this.$content.empty();
       this.$content.append(this._content);
       this._setListeners();
