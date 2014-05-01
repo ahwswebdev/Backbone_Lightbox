@@ -29,19 +29,10 @@ describe('lightbox', function () {
   describe('options init', function () {
 
     it('default', function () {
+      expect(this.LightboxView.options.closeButton).toBe(true);
       expect(this.LightboxView.options.closeButtonTitle).toBe('close');
-    });
-
-    it('closeButtonTitle', function () {
-      var lightboxView = new LightboxView({closeButtonTitle: 'sluit'});
-      lightboxView.show();
-      expect(lightboxView.$el.html()).toContain('sluit');
-    });
-
-    it('additional className', function () {
-      var lightboxView = new LightboxView({additionalClassName: 'location-class'});
-      lightboxView.show();
-      expect(lightboxView.$el).toHaveClass('location-class');
+      expect(this.LightboxView.options.closeButtonText).toBe('close');
+      expect(this.LightboxView.options.centerVertically).toBe(true);
     });
   });
 
@@ -141,6 +132,19 @@ describe('lightbox', function () {
       this.LightboxView.show('<p>text</p>', {closeButton: false});
       expect(this.LightboxView.$el).not.toContain('.lightbox-close');
     });
+
+    it('closeButtonTitle', function () {
+      var lightboxView = new LightboxView({closeButton: true, closeButtonTitle: 'close me'});
+      lightboxView.show();
+      expect(lightboxView.$el.html()).toContain('close me');
+    });
+
+    it('closeButtonText', function () {
+      var lightboxView = new LightboxView({closeButton: true, closeButtonText: 'close me text'});
+      lightboxView.show();
+      expect(lightboxView.$el.html()).toContain('close me text');
+    });
+
   });
 
   describe('additionalClassName', function () {

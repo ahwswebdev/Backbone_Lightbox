@@ -13,7 +13,8 @@
     options: {
       closeButton: true,
       closeButtonTitle: 'close',
-      centerVertically: true
+      closeButtonText: 'close',
+      centerVertically: true,
     },
 
     renderOptions: null,
@@ -46,7 +47,7 @@
 
     _setTemplate: function () {
       var template = '<div class="lightbox-wrapper">' +
-      '<% if (closeButton) { %> <button class="lightbox-close" title="<%= closeButtonTitle %>"></button> <% } %>' +
+      '<% if (closeButton) { %> <button class="lightbox-close" title="<%= closeButtonTitle %>"><%= closeButtonText %></button> <% } %>' +
       '<div class="lightbox-content"></div>' +
       '</div>';
       this.template = _.template(template);
