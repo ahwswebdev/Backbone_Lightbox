@@ -6,7 +6,9 @@ describe('lightbox', function () {
     this.LightboxView = new LightboxView();
   });
 
-  afterEach(function () {});
+  afterEach(function () {
+    this.LightboxView.remove();
+  });
 
   it('is properly initialized and hidden', function () {
     expect(this.LightboxView.$el).toHaveClass('lightbox');
@@ -16,7 +18,8 @@ describe('lightbox', function () {
     expect(this.LightboxView.$el).toBeHidden();
   });
 
-  describe('options', function () {
+  describe('options init', function () {
+
     it('default', function () {
       expect(this.LightboxView.options.closeButtonTitle).toBe('close');
     });
@@ -27,10 +30,11 @@ describe('lightbox', function () {
     });
 
     it('additional className', function () {
-      var lightboxView = new LightboxView({'additionalClassName': 'location-class'});
+      var lightboxView = new LightboxView({additionalClassName: 'location-class'});
       expect(lightboxView.$el).toHaveClass('location-class');
     });
   });
+
 
   describe('show', function () {
 
@@ -78,13 +82,13 @@ describe('lightbox', function () {
     });
 
     it('to have custom width', function () {
-      this.LightboxView.show('<p class="par">text</p>', 400);
+      this.LightboxView.show('<p class="par">text</p>', {width: 400});
       expect(this.LightboxView.$wrapper).toHaveCss({width: '400px'});
     });
 
     it('to have custom width overriding default with', function () {
       var lightboxView = new LightboxView({width: 400});
-      lightboxView.show('<p class="par">text</p>', 500);
+      lightboxView.show('<p class="par">text</p>', {width: 500});
       expect(lightboxView.$wrapper).toHaveCss({width: '500px'});
     });
   });
@@ -121,6 +125,24 @@ describe('lightbox', function () {
       this.LightboxView = new LightboxView({closeButton: false});
       this.LightboxView.show('<p class="par">text</p>');
       expect(this.LightboxView.$el).not.toContain('.lightbox-close');
+    });
+
+    it('to not have closeButton on show', function () {
+      this.LightboxView.show('<p>text</p>', {closeButton: false});
+      expect(this.LightboxView.$el).not.toContain('.lightbox-close');
+    });
+  });
+
+  describe('additionalClassName', function () {
+
+    it('default', function () {
+      this.LightboxView = new LightboxView({additionalClassName: 'location-class'});
+      expect(this.LightboxView.$el).toHaveClass('location-class');
+    });
+
+    it('on show', function () {
+      this.LightboxView.show('<p>text</p>', {additionalClassName: 'location-class'});
+      expect(this.LightboxView.$el).toHaveClass('location-class');
     });
   });
 

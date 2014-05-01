@@ -9,6 +9,7 @@
       closeButtonTitle: 'close',
       centerVertically: true
     },
+    renderOptions: null,
     content: '',
     _dfd: null,
 
@@ -18,16 +19,9 @@
 
     initialize: function (options) {
       this.options = $.extend(this.options, options);
-      this.$el.html('<div class="lightbox-wrapper"><div class="lightbox-content"></div></div>');
-      if (this.options.closeButton) {
-        this.$('.lightbox-wrapper').prepend('<button class="lightbox-close" title="' + this.options.closeButtonTitle + '"></button>');
-      }
-      if (this.options.additionalClassName) {
-        this.$el.addClass(this.options.additionalClassName);
-      }
       $('body').append(this.$el);
       this.hide();
-      this._setLocalScope();
+      this.render();
       this._setListeners();
     },
 
@@ -79,30 +73,56 @@
       this._dfd = new jQuery.Deferred();
     },
 
-    render: function () {
+    render: function (options) {
+
+      this.renderOptions = $.extend(this.options, options);
+
+      this.$el.html('<div class="lightbox-wrapper"><div class="lightbox-content"></div></div>');
+      if (this.renderOptions.closeButton) {
+        this.$('.lightbox-wrapper').prepend('<button class="lightbox-close" title="' + this.renderOptions.closeButtonTitle + '"></button>');
+      }
+      if (this.renderOptions.additionalClassName) {
+        this.$el.addClass(this.renderOptions.additionalClassName);
+      }
+      this._setLocalScope();
       this.$content.empty();
       this.$content.append(this._content);
       return this;
     },
 
-    show: function (content, width) {
+    show: function (content, options) {
+
+      var width;
+
       // try to set content
       if (content) {
         if (!this._setContent(content)) {
           return false;
         }
       }
+
+      // render
+      this.render(options);
+
       // set width
-      width = width || this.options.width;
+      if (options && options.width) {
+        width = options.width;
+      } else {
+        width = this.options.width;
+      }
       if (width) {
         this._setWidth(width);
       }
-      // show content
-      this.render();
+
+      // show
       this.$el.show();
+
+      // center vertically
       if (this.options.centerVertically) {
         this._centerVertically();
       }
+
+      // promise handling
       this._setPromise();
       return this._dfd.promise();
     },
