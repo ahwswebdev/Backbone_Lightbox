@@ -15,6 +15,7 @@
       closeButtonTitle: 'close',
       closeButtonText: 'close',
       centerVertically: true,
+      scrollBody: true
     },
 
     renderOptions: null,
@@ -22,6 +23,8 @@
     template: null,
 
     content: '',
+
+    scroll: {},
 
     _dfd: null,
 
@@ -106,7 +109,6 @@
 
     render: function (options) {
 
-      this.renderOptions = $.extend(this.options, options);
 
       this.$el.html(this.template(this.renderOptions));
 
@@ -131,8 +133,11 @@
         }
       }
 
+      // set render options
+      this.renderOptions = $.extend(this.options, options);
+
       // render
-      this.render(options);
+      this.render(this.renderOptions);
 
       // set width
       if (options && options.width) {
@@ -148,8 +153,13 @@
       this.$el.show();
 
       // center vertically
-      if (this.options.centerVertically) {
+      if (this.renderOptions.centerVertically) {
         this._centerVertically();
+      }
+
+      // setBodyCss
+      if (this.renderOptions.scrollBody) {
+        this._scrollBody(this.renderOptions.scrollBody);
       }
 
       // promise handling
@@ -161,6 +171,9 @@
       this._removeListeners();
       this.$el.hide();
       this.$el.removeClass().addClass('lightbox');
+      if (this.scroll.$elem) {
+        this._unScrollBody();
+      }
       this._resolvePromise();
       return this;
     },
@@ -192,6 +205,27 @@
         this._centeredVertically = true;
         this.$wrapper.css('marginTop', Math.floor((windowHeight - wrapperHeight) / 2));
       }
+    },
+
+    _scrollBody: function ($elem) {
+
+      var scrollTop;
+
+      this.scroll = {};
+
+      this.scroll.$elem = $elem.length ? $elem : $('body');
+      this.scroll.scrollTop = $(window).scrollTop();
+      this.scroll.position = this.scroll.$elem.css('position');
+      this.scroll.marginTop = this.scroll.$elem.css('marginTop');
+
+      this.scroll.$elem.css({position: 'fixed', marginTop: -this.scroll.scrollTop});
+      window.scrollTo(0, 0);
+   },
+
+    _unScrollBody: function ($elem) {
+
+      this.scroll.$elem.css({position: this.scroll.position, marginTop: this.scroll.marginTop});
+      window.scrollTo(0, this.scroll.scrollTop);
     }
   });
 

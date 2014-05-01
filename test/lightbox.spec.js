@@ -190,4 +190,43 @@ describe('lightbox', function () {
       expect(spy).not.toHaveBeenCalled();
     });
   });
+
+  describe('scroll body', function () {
+
+    it('body to have CSS set and window to be scrolled', function () {
+
+      var position, marginTop;
+      position = $('body').css('position');
+      marginTop = $('body').css('marginTop');
+
+      this.LightboxView.show('<p class="par">text</p>');
+      expect($('body')).toHaveCss({position: 'fixed'});
+      this.LightboxView.hide();
+      expect($('body')).toHaveCss({position: position, 'margin-top': marginTop});
+    });
+
+    it('body to not have CSS set', function () {
+
+      $('body').css('position', 'relative');
+      this.LightboxView.show('<p class="par">text</p>', {scrollBody: false});
+      expect($('body')).not.toHaveCss({position: 'fixed'});
+    });
+
+    it('elem to have CSS set and window to be scrolled', function () {
+
+      var position, marginTop, $bodyContainer;
+
+      $bodyContainer = $('<div></div>', {'class': 'body-container'});
+
+      $('body').append($bodyContainer);
+
+      position = $bodyContainer.css('position');
+      marginTop = $bodyContainer.css('marginTop');
+
+      this.LightboxView.show('<p class="par">text</p>', {scrollBody: $bodyContainer});
+      expect($bodyContainer).toHaveCss({position: 'fixed'});
+      this.LightboxView.hide();
+      expect($bodyContainer).toHaveCss({position: position, 'margin-top': marginTop});
+    });
+  });
 });
