@@ -3,14 +3,23 @@
   var LightboxView = Backbone.View.extend({
 
     tagName: 'div',
+
+    attributes: {
+      style: 'display: none;'
+    },
+
     className: 'lightbox',
+
     options: {
       closeButton: true,
       closeButtonTitle: 'close',
       centerVertically: true
     },
+
     renderOptions: null,
+
     content: '',
+
     _dfd: null,
 
     events: {
@@ -20,7 +29,6 @@
     initialize: function (options) {
       this.options = $.extend(this.options, options);
       $('body').append(this.$el);
-      this.hide();
       this.render();
       this._setListeners();
     },
