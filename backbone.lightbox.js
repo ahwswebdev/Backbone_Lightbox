@@ -164,19 +164,20 @@
       return this;
     },
 
-    _onElClicked: function (e) {
-      if ($(e.target).hasClass('lightbox')) {
+    _onElClicked: function (event) {
+      if ($(event.target).hasClass('lightbox')) {
+        event.stopPropagation();
         this.hide();
       }
     },
 
-    _keyup: function (e) {
-      if (e.keyCode === 27) { // esc
+    _keyup: function (event) {
+      if (event.keyCode === 27) { // esc
         this.hide();
       }
     },
 
-    _onResize: function (e) {
+    _onResize: function (event) {
       if (this._centeredVertically) {
         this._centerVertically();
       }
