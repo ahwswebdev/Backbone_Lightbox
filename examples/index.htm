@@ -16,9 +16,6 @@ body {
   height: 3000px;
   background-color: red;
 }
-.locked {
-  position: fixed;
-}
 .lightbox {
   background-color: black;
   background-color: rgba(0, 0, 0, 0.4);
@@ -49,13 +46,9 @@ body {
 <script>
 $(function () {
   var lightboxView = new LightboxView();
-  $('.body-container').click(function () {
-    var scrollTop = $(window).scrollTop();
-    $('.body-container').addClass('locked').css('marginTop', -scrollTop);
-    $.when(lightboxView.show('<p style="margin:0; padding: 0; height:2000px;">height: 2000 px;</p>')).then(function () {
-      $('.body-container').removeClass('locked').css('marginTop', 0);
-      window.scrollTo(0, scrollTop);
-    });
+  var $bodyContainer = $('.body-container');
+  $bodyContainer.click(function () {
+    lightboxView.show('<p style="margin:0; padding: 0; height:2000px;">height: 2000 px;</p>', {scrollBody: $bodyContainer}).then(function () {});
   });
 });
 </script>
