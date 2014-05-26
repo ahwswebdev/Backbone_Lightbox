@@ -224,6 +224,9 @@
 
     _unScrollBody: function ($elem) {
 
+      if (this.scroll.$elem.is(':hidden')) {
+        this.scroll.$elem.show();
+      }
       this.scroll.$elem.css({position: this.scroll.position, marginTop: this.scroll.marginTop});
       window.scrollTo(0, this.scroll.scrollTop);
     }
