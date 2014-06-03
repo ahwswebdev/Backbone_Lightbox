@@ -180,6 +180,7 @@
 
     _onElClicked: function (event) {
       if ($(event.target).hasClass('lightbox')) {
+        event.preventDefault();
         event.stopPropagation();
         this.hide();
       }
